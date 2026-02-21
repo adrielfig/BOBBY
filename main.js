@@ -1,9 +1,9 @@
-import { app, BrowserWindow } from 'electron'
+const { app, BrowserWindow, Menu } = require('electron')
+
 const createWindow = () => {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
-    titleBarStyle: 'hidden'
   })
 
   win.loadFile('index.html')
@@ -11,4 +11,5 @@ const createWindow = () => {
 
 app.whenReady().then(() => {
   createWindow()
+  Menu.setApplicationMenu(null);
 })
