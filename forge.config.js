@@ -4,6 +4,17 @@ const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 module.exports = {
   packagerConfig: {
     asar: true,
+    ignore: (path) => {
+      if (path.includes('/cloud')) {
+        return true;
+      }
+      if (path === '/README.md') {
+        return true;
+      }
+      if (path === '/.gitignore') {
+        return true;
+      }
+    }
   },
   rebuildConfig: {},
   makers: [
