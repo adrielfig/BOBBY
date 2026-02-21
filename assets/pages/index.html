@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Controlador da Bilheteria</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+</head>
+
+<body>
+  <nav id="navbar" style="display: none;">
+    <ul>
+      <li><button onclick="transition('ingressos')">Ingressos</button></li>
+      <li><button onclick="transition('campeonatos')">Campeonatos</button></li>
+      <li><button onclick="transition('estatisticas')">Estatísticas</button></li>
+      <li><button onclick="transition('configuracoes')">Configurações</button></li>
+    </ul>
+  </nav>
+  <main id="container">
+    <h1 id="entrada" class="animate__animated animate__backInDown">Seja bem-vindo, Bobby.</h1>
+  </main>
+
+  <script src="../js/pageTransition.js"></script>
+  <script src="../js/processHandler.js"></script>
+</body>
+
+</html>

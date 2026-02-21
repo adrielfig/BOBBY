@@ -43,6 +43,8 @@ jspm_packages/
 package-lock.json
 yarn.lock
 
+forge.config.js
+
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
 

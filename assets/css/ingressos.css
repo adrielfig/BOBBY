@@ -1,0 +1,55 @@
+@font-face {
+    font-family: "RobotoRegular";
+    src: url('../fonts/Roboto-Regular.ttf');
+}
+@font-face {
+    font-family: "RobotoThin";
+    src: url('../fonts/Roboto-Thin.ttf');
+}
+
+#ingressos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:start;
+    height: 90%;
+}
+
+#ingressos h1 {
+    font-family: "RobotoRegular";
+    color: var(--secondary-color);
+    margin-bottom: 0px;
+}
+
+#ingressos p {
+    font-family: "RobotoThin";
+    color: var(--secondary-color);
+    width: 60%;
+    text-align: center;
+}
+
+#ingressos span {
+    font-family: "RobotoRegular";
+    color: var(--secondary-color);
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#ingressos select {
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    color: var(--secondary-color);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+#ingressos div button {
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    color: var(--secondary-color);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 20px;
+}
