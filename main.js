@@ -18,7 +18,12 @@ function createWindow() {
  // Menu.setApplicationMenu(null);
 }
 
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
+  await fetch(`${process.env.PURGE_URL}`).then(() => {
+    console.log('Cache purgado com sucesso!');
+  }).catch(error => {
+    console.error('Erro ao purgar cache:', error);
+  });
   ipcMain.handle('get-cloud-page', async (event, page) => {
     const response = await fetch(`${process.env.GITHUB_CLOUD}/pages/${page}`);
     return response.text();
