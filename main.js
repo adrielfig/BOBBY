@@ -1,13 +1,28 @@
 require('dotenv').config();
-const { app, BrowserWindow, Menu } = require('electron')
+const { app, BrowserWindow, Menu, ipcMain } = require('electron')
+const path = require('path')
 
-app.whenReady().then(() => {
+function createWindow() {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
-    icon: './assets/images/icon.jpg',
+    icon: path.join(__dirname, 'assets', 'images', 'icon.jpg'),
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
+      contextIsolation: true, 
+      nodeIntegration: false 
+    }
   })
 
   win.loadFile('./assets/pages/index.html')
   Menu.setApplicationMenu(null);
+}
+
+app.whenReady().then(() => {
+  ipcMain.handle('get-cloud-page', async (event, page) => {
+    const response = await fetch(`${process.env.GITHUB_CLOUD}${page}`);
+    return response.text();
+  });
+  
+  createWindow()
 })
