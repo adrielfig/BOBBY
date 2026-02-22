@@ -9,30 +9,37 @@ function createWindow() {
     icon: path.join(__dirname, 'assets', 'images', 'icon.jpg'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
-      contextIsolation: true, 
-      nodeIntegration: false 
+      contextIsolation: true,
+      nodeIntegration: false
     }
   })
 
   win.loadFile('./index.html')
- // Menu.setApplicationMenu(null);
+  // Menu.setApplicationMenu(null);
 }
 
 app.whenReady().then(async () => {
-  await fetch(`${process.env.PURGE_URL}`).then(() => {
-    console.log('Cache purgado com sucesso!');
-  }).catch(error => {
-    console.error('Erro ao purgar cache:', error);
-  });
   ipcMain.handle('get-cloud-page', async (event, page) => {
-    const response = await fetch(`${process.env.GITHUB_CLOUD}/pages/${page}`);
+    await fetch(`${process.env.PURGE_URL}/pages/${page}`)
+    const response = await fetch(`${process.env.GITHUB_CLOUD}/pages/${page}`, {
+      cache: 'no-store'
+    });
     return response.text();
   });
 
   ipcMain.handle('get-campeonatos', async () => {
-    const response = await fetch(`${process.env.FIREBASE_URL}/campeonatos.json?auth=${process.env.FIREBASE_AUTH_KEY}`);
+    const response = await fetch(`${process.env.FIREBASE_URL}/campeonatos.json?auth=${process.env.FIREBASE_AUTH_KEY}`, {
+      cache: 'no-store'
+    });
+    return response.json();
+  });  
+
+  ipcMain.handle('get-ingressos', async (event, campeonato) => {
+    const response = await fetch(`${process.env.FIREBASE_URL}/campeonatos/${campeonato}/ingressos.json?auth=${process.env.FIREBASE_AUTH_KEY}`, {
+      cache: 'no-store'
+    });
     return response.json();
   });
-  
+
   createWindow()
 })
