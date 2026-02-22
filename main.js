@@ -15,13 +15,18 @@ function createWindow() {
   })
 
   win.loadFile('./index.html')
-  Menu.setApplicationMenu(null);
+ // Menu.setApplicationMenu(null);
 }
 
 app.whenReady().then(() => {
   ipcMain.handle('get-cloud-page', async (event, page) => {
     const response = await fetch(`${process.env.GITHUB_CLOUD}/pages/${page}`);
     return response.text();
+  });
+
+  ipcMain.handle('get-campeonatos', async () => {
+    const response = await fetch(`${process.env.FIREBASE_URL}/campeonatos.json?auth=${process.env.FIREBASE_AUTH_KEY}`);
+    return response.json();
   });
   
   createWindow()

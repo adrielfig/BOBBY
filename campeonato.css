@@ -28,16 +28,7 @@
     text-align: center;
 }
 
-#campeonatos select {
-    background-color: var(--primary-color);
-    border-radius: 5px;
-    color: var(--secondary-color);
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-}
-
-#campeonatos div button {
+#campeonatos button {
     background-color: var(--primary-color);
     border-radius: 5px;
     color: var(--secondary-color);

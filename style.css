@@ -63,9 +63,9 @@ nav ul li button {
 }
 
 .selected-nav {
-    background-color: var(--secondary-color);
-    color: var(--third-color);
-    scale: 1.125;
+    background-color: var(--secondary-color) !important;
+    color: var(--third-color) !important;
+    scale: 1.125 !important;
 }
 
 nav ul li button:hover {
