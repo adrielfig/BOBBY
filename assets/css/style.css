@@ -53,13 +53,19 @@ nav ul {
 
 nav ul li button {
     background-color: var(--third-color);
-    border-radius: 5px;
     color: var(--secondary-color);
+    border-radius: 5px;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
     font-family: "RobotoRegular";
     transition: 0.3s ease;
+}
+
+.selected-nav {
+    background-color: var(--secondary-color);
+    color: var(--third-color);
+    scale: 1.125;
 }
 
 nav ul li button:hover {

@@ -1,4 +1,8 @@
-function transition(newPage) {
+function transition(newPage, button) {
+    const botoes = document.querySelectorAll('nav ul li button');
+    botoes.forEach(btn => btn.classList.remove('selected-nav'));
+    button.classList.add('selected-nav');
+    
     const pageContent = window.api.getCloudPage(newPage);
     pageContent.then(content => {
         container.innerHTML = content;

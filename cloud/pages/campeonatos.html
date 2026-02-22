@@ -10,9 +10,8 @@
   style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
 ">
   <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
-  <link rel="stylesheet" href="./assets/css/ingressos.css" />
-  <link rel="stylesheet" href="./assets/css/campeonato.css" />
-  <link rel="stylesheet" href="./assets/css/style.css" />
+  <link rel="stylesheet" href="../../assets/css/campeonato.css" />
+  <link rel="stylesheet" href="../../assets/css/style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
 
@@ -26,7 +25,22 @@
     </ul>
   </nav>
   <main id="container">
-    <h1 id="entrada" class="animate__animated animate__backInDown">Seja bem-vindo, Bobby.</h1>
+    <div id="campeonatos">
+      <h1>Campeonatos</h1>
+      <p>Aqui você pode gerenciar os campeonatos para fazer ingressos.</p>
+      <div id="campeonatos-btns">
+        <button id="novo-campeonato-btn">Novo Campeonato</button>
+        <button id="excluir-campeonato-btn">Excluir Campeonato</button>
+        <button id="editar-campeonato-btn">Editar Campeonato</button>
+      </div>
+      <div id="campeonatos-lista">
+        <ul>
+          <li>Campeonato Brasileiro - 2024</li>
+          <li>Campeonato Paulista - 2024</li>
+          <li>Campeonato Mineiro - 2024</li>
+        </ul>
+      </div>
+    </div>
   </main>
 
   <script src="https://cdn.jsdelivr.net/gh/adrielfig/BOBBY@refs/heads/master/cloud/js/processHandler.js"></script>
