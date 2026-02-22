@@ -14,13 +14,13 @@ function createWindow() {
     }
   })
 
-  win.loadFile('./assets/pages/index.html')
-  Menu.setApplicationMenu(null);
+  win.loadFile('./index.html')
+  //Menu.setApplicationMenu(null);
 }
 
 app.whenReady().then(() => {
   ipcMain.handle('get-cloud-page', async (event, page) => {
-    const response = await fetch(`${process.env.GITHUB_CLOUD}${page}`);
+    const response = await fetch(`${process.env.GITHUB_CLOUD}/pages/${page}`);
     return response.text();
   });
   

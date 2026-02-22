@@ -4,6 +4,12 @@
 <head>
   <meta charset="UTF-8" />
   <title>Controlador da Bilheteria</title>
+  <meta http-equiv="Content-Security-Policy" content="
+  default-src 'self'; 
+  script-src 'self' https://cdn.jsdelivr.net 'unsafe-inline'; 
+  style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com;
+">
+  <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
   <link rel="stylesheet" href="./assets/css/ingressos.css" />
   <link rel="stylesheet" href="./assets/css/style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
@@ -22,8 +28,8 @@
     <h1 id="entrada" class="animate__animated animate__backInDown">Seja bem-vindo, Bobby.</h1>
   </main>
 
-  <script src="../js/pageTransition.js"></script>
-  <script src="../js/processHandler.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/adrielfig/BOBBY@refs/heads/master/cloud/js/processHandler.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/adrielfig/BOBBY@refs/heads/master/cloud/js/pageTransition.js"></script>
 </body>
 
 </html>
