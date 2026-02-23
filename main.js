@@ -1,6 +1,7 @@
 require('dotenv').config();
 const { app, BrowserWindow, Menu, ipcMain } = require('electron')
 const path = require('path')
+const fs = require('fs');
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -24,14 +25,19 @@ app.whenReady().then(async () => {
     const response = await fetch(`${process.env.GITHUB_CLOUD}/pages/${page}`, {
       cache: 'no-store'
     });
-    return response.text();
+    return await response.text();
   });
 
   ipcMain.handle('get-campeonatos', async () => {
     const response = await fetch(`${process.env.FIREBASE_URL}/campeonatos.json?auth=${process.env.FIREBASE_AUTH_KEY}`, {
       cache: 'no-store'
     });
-    return response.json();
+    const body = await response.json();
+    console.log(body);
+    console.log(Object.keys(body));
+    console.log(body ? Object.keys(body).map(key => ({ nome: key })) : [])
+
+    return body ? Object.keys(body).map(key => ({ nome: key})) : [];
   });  
 
   ipcMain.handle('get-ingressos', async (event, campeonato) => {

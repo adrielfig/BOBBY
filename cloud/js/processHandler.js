@@ -12,6 +12,21 @@ if (previousTheme && previousTheme === 'dark') {
     root.style.setProperty('--third-color', '#1f1f1f');
 }
 
+function carregarCampeonatos() {
+    window.api.getCampeonatos().then(campeonatos => {
+        const list = container.querySelector('#campeonatos-lista ul');
+        if (!list) return;
+        list.innerHTML = '';
+        campeonatos.forEach(campeonato => {
+            const li = document.createElement('li');
+            li.textContent = campeonato.nome;
+            list.appendChild(li);
+        });
+    }).catch(error => {
+        console.error('Erro ao carregar campeonatos:', error);
+    });
+}
+
 // Remoção da animação de entrada
 setTimeout(() => {
     const h1 = container.getElementsByTagName('h1')[0];

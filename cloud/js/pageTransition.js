@@ -4,6 +4,10 @@ async function campeonatos() {
     list.innerHTML = '';
     try {
         const data = await window.api.getCampeonatos();
+        if (!data || data.length === 0) {
+            list.innerHTML = '<li>Nenhum campeonato encontrado.</li>';
+            return;
+        }
         data.forEach(campeonato => {
             const li = document.createElement('li');
             li.textContent = campeonato.nome;
@@ -14,15 +18,53 @@ async function campeonatos() {
     }
 }
 
+let campeonatoSelected = null;
+
 async function ingressos() {
     const campeonatoSelect = document.getElementById('ingressos-campeonato-select');
     const list = container.querySelector('#ingressos-lista ul');
+    const ingressosBtns = document.getElementById('ingressos-btns');
     if (!campeonatoSelect || !list) return;
 
     async function carregarIngressos() {
         list.innerHTML = '';
+        campeonatoSelected = campeonatoSelect.value;
+        console.log(campeonatoSelected);
+        ingressosBtns.style.display = 'none';
+        if (campeonatoSelect.value === '') {
+            list.innerHTML = '<li>Por favor, selecione um campeonato.</li>';
+            return;
+        }
+        // Carrega os campeonatos para o select
+        try {
+            const data = await window.api.getCampeonatos();
+            if (!data || data.length === 0) {
+                campeonatoSelect.innerHTML = '<option value="">Nenhum campeonato disponível</option>';
+                campeonatoSelected = null;
+                return;
+            }
+            campeonatoSelect.innerHTML = '<option value="">Selecione um campeonato</option>';
+            console.log(campeonatoSelected)
+            ingressosBtns.style.display = 'block';
+            data.forEach(campeonato => {
+                const option = document.createElement('option');
+                option.id = campeonato.nome;
+                option.value = campeonato.nome;
+                option.textContent = campeonato.nome;
+                campeonatoSelect.appendChild(option);
+            });
+            campeonatoSelect.value = campeonatoSelected || '';
+            campeonatoSelected = null;
+        } catch (error) {
+            console.error(error);
+        }
+
         try {
             const data = await window.api.getIngressos(campeonatoSelect.value);
+            if (!data || data.length === 0) {
+                list.innerHTML = '<li>Nenhum ingresso encontrado para o campeonato selecionado.</li>';
+                return;
+            }
             data.forEach(ingresso => {
                 const li = document.createElement('li');
                 li.textContent = ingresso.nome;

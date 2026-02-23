@@ -37,3 +37,8 @@
     cursor: pointer;
     margin-top: 20px;
 }
+
+#campeonatos-lista ul {
+    list-style: none;
+    padding: 0;
+}

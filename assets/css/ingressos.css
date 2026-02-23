@@ -5,7 +5,7 @@
 @font-face {
     font-family: "RobotoThin";
     src: url('../fonts/Roboto-Thin.ttf');
-}
+} 
 
 #ingressos {
     display: flex;
@@ -52,4 +52,9 @@
     padding: 10px 20px;
     cursor: pointer;
     margin-top: 20px;
+}
+
+#ingressos-lista ul {
+    list-style: none;
+    padding: 0;
 }
