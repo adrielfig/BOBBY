@@ -12,19 +12,31 @@ if (previousTheme && previousTheme === 'dark') {
     root.style.setProperty('--third-color', '#1f1f1f');
 }
 
-function carregarCampeonatos() {
-    window.api.getCampeonatos().then(campeonatos => {
-        const list = container.querySelector('#campeonatos-lista ul');
-        if (!list) return;
-        list.innerHTML = '';
-        campeonatos.forEach(campeonato => {
-            const li = document.createElement('li');
-            li.textContent = campeonato.nome;
-            list.appendChild(li);
-        });
-    }).catch(error => {
-        console.error('Erro ao carregar campeonatos:', error);
-    });
+function gerarInputNovo() {
+    const container = document.getElementById('container-input');
+    container.innerHTML = `
+        <input type="text" id="input-nome" placeholder="Nome do campeonato...">
+        <button onclick="confirmarCriacao()">✔ Confirmar</button>
+        <button onclick="this.parentElement.innerHTML=''">✖ Cancelar</button>
+    `;
+    setTimeout(() => {
+        const input = document.getElementById('input-nome');
+        if(input) input.focus();
+    }, 50);
+}
+
+async function confirmarCriacao() {
+    const nome = document.getElementById('input-nome').value;
+    if (!nome) return alert("Digite um nome!");
+
+    try {
+        const resultado = await window.api.criarCampeonato(nome);
+        if (resultado == "existente") return alert("Campeonato já existe!");
+        document.getElementById('container-input').innerHTML = '';
+        campeonatos();
+    } catch (err) {
+        console.error(err);
+    }
 }
 
 // Remoção da animação de entrada

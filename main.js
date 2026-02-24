@@ -33,6 +33,7 @@ app.whenReady().then(async () => {
       cache: 'no-store'
     });
     const body = await response.json();
+    if (!body) return [];
     console.log(body);
     console.log(Object.keys(body));
     console.log(body ? Object.keys(body).map(key => ({ nome: key })) : [])
@@ -43,6 +44,33 @@ app.whenReady().then(async () => {
   ipcMain.handle('get-ingressos', async (event, campeonato) => {
     const response = await fetch(`${process.env.FIREBASE_URL}/campeonatos/${campeonato}/ingressos.json?auth=${process.env.FIREBASE_AUTH_KEY}`, {
       cache: 'no-store'
+    });
+    return response.json();
+  });
+
+  ipcMain.handle('criar-campeonato', async (event, data) => {
+    const exists = await fetch(`${process.env.FIREBASE_URL}/campeonatos/${data}.json?auth=${process.env.FIREBASE_AUTH_KEY}`, {
+      cache: 'no-store'
+    });
+
+    const existResult = await exists.text()
+
+    if (existResult !== "null" && existResult !== null) return "existente";
+
+    const response = await fetch(`${process.env.FIREBASE_URL}/campeonatos/${data}.json?auth=${process.env.FIREBASE_AUTH_KEY}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'      },
+      body: JSON.stringify({ createdAt: new Date().toISOString() })
+    });
+
+    return response.json();
+  });
+
+  ipcMain.handle('excluir-campeonato', async (event, data) => {
+
+    const response = await fetch(`${process.env.FIREBASE_URL}/campeonatos/${data}.json?auth=${process.env.FIREBASE_AUTH_KEY}`, {
+      method: 'DELETE'
     });
     return response.json();
   });

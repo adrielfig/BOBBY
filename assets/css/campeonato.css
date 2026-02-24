@@ -38,6 +38,10 @@
     margin-top: 20px;
 }
 
+#campeonatos-lista {
+    margin-top: 15px;
+}
+
 #campeonatos-lista ul {
     list-style: none;
     padding: 0;
