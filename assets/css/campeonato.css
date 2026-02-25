@@ -38,6 +38,11 @@
     margin-top: 20px;
 }
 
+#container-input {
+    display: none;
+    margin-top: 5px;
+}
+
 #campeonatos-lista {
     margin-top: 15px;
 }

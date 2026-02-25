@@ -1,8 +1,12 @@
 <div id="campeonatos">
   <h1>Campeonatos</h1>
   <p>Aqui você pode gerenciar os campeonatos para fazer ingressos.</p>
-  <button id="novo-campeonato-btn" onclick="gerarInputNovo()">Novo Campeonato</button>
-  <div id="container-input"></div>
+  <button id="novo-campeonato-btn" onclick="aparecerCampeonatoInput()">Novo Campeonato</button>
+  <div id="campeonato-input">
+    <input type="text" id="input-campeonato-nome" placeholder="Nome do campeonato...">
+    <button onclick="confirmarCampeonatoCriacao()">✔ Confirmar</button>
+    <button onclick="this.parentElement.style.display='none'">✖ Cancelar</button>
+  </div>
   <div id="campeonatos-lista">
     <ul>
       <li>Campeonato Brasileiro - 2024</li>

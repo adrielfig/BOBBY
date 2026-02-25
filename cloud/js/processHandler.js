@@ -12,21 +12,17 @@ if (previousTheme && previousTheme === 'dark') {
     root.style.setProperty('--third-color', '#1f1f1f');
 }
 
-function gerarInputNovo() {
-    const container = document.getElementById('container-input');
-    container.innerHTML = `
-        <input type="text" id="input-nome" placeholder="Nome do campeonato...">
-        <button onclick="confirmarCriacao()">✔ Confirmar</button>
-        <button onclick="this.parentElement.innerHTML=''">✖ Cancelar</button>
-    `;
-    setTimeout(() => {
-        const input = document.getElementById('input-nome');
-        if(input) input.focus();
-    }, 50);
+function aparecerCampeonatoInput() {
+    const container = document.getElementById('campeonato-input');
+    container.style.display = 'block';
+}
+function aparecerIngressoInput() {
+    const container = document.getElementById('novo-ingresso-input');
+    container.style.display = 'block';
 }
 
-async function confirmarCriacao() {
-    const nome = document.getElementById('input-nome').value;
+async function confirmarCampeonatoCriacao() {
+    const nome = document.getElementById('input-campeonato-nome').value;
     if (!nome) return alert("Digite um nome!");
 
     try {

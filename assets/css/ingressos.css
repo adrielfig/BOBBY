@@ -2,16 +2,17 @@
     font-family: "RobotoRegular";
     src: url('../fonts/Roboto-Regular.ttf');
 }
+
 @font-face {
     font-family: "RobotoThin";
     src: url('../fonts/Roboto-Thin.ttf');
-} 
+}
 
 #ingressos {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content:start;
+    justify-content: start;
     height: 90%;
 }
 
@@ -44,10 +45,11 @@
     cursor: pointer;
 }
 
-#ingressos div button {
+#ingressos button {
     background-color: var(--primary-color);
     border-radius: 5px;
     color: var(--secondary-color);
+    display: inline-block;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
@@ -57,4 +59,24 @@
 #ingressos-lista ul {
     list-style: none;
     padding: 0;
+}
+
+#novo-ingresso-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#novo-ingresso-input input {
+    display: block;
+    width: 280px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#novo-ingresso-input button {
+    display: inline-block;
+    width: auto;
+    margin-right: 10px;
 }

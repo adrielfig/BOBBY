@@ -4,10 +4,23 @@
     vendas de um ingresso específico na aba de estatísticas.</p>
   <span>Selecione o campeonato:</span>
   <select id="ingressos-campeonato-select"></select>
-  <div id="ingressos-btns">
-    <button id="novo-ingresso-btn">Novo Ingresso</button>
-    <button id="excluir-ingresso-btn">Excluir Ingresso</button>
-    <button id="editar-ingresso-btn">Editar Ingresso</button>
+  <button id="novo-ingresso-btn" onclick="aparecerIngressoInput()">Novo Ingresso</button>
+  <div id="novo-ingresso-input">
+    <input type="text" id="novo-ingresso-jogo" placeholder="Qual jogo? Ex: FLAMENGO x PALMEIRAS">
+    <input type="text" id="novo-ingresso-preco" placeholder="Preço do ingresso em robux. Ex: 25">
+    <input type="text" id="novo-ingresso-estoque" placeholder="Quantidade de ingressos disponíveis. Ex: 50">
+    <input type="text" id="novo-ingresso-data" placeholder="Data do jogo. Ex: 10/05/2026">
+    <input type="text" id="novo-ingresso-horario" placeholder="Horário do jogo. Ex: 19:00">
+    <input type="text" id="novo-ingresso-estadio" placeholder="Estádio do jogo. Ex: Maracanã">
+    <label for="novo-ingresso-thumb" style="margin-bottom: 10px;">
+      <span>Thumbnail do jogo (opcional)</span>
+    </label>
+    <input type="file" id="novo-ingresso-thumb" accept="image/*">
+
+    <div id="novo-ingresso-btns">
+      <button onclick="confirmarIngressoCriacao()">✔ Confirmar</button>
+      <button onclick="this.parentElement.parentElement.style.display='none'">✖ Cancelar</button>
+    </div>
   </div>
   <div id="ingressos-lista">
     <ul>
