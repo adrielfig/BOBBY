@@ -23,8 +23,6 @@ body {
     padding: 0;
 }
 
-/* Navbar */
-
 main#container {
     display: flex;
     flex-direction: column;
@@ -33,6 +31,8 @@ main#container {
     width: 100%;
     height: 85vh;
 }
+
+/* Navbar */
 
 nav {
     display: flex;
