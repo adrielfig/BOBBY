@@ -62,14 +62,14 @@ let campeonatoSelected = null;
 async function ingressos() {
     const campeonatoSelect = document.getElementById('ingressos-campeonato-select');
     const list = container.querySelector('#ingressos-lista ul');
-    const ingressosBtns = document.getElementById('ingressos-btns');
+    const novoIngressoBtns = document.getElementById('novo-ingresso-btns');
     if (!campeonatoSelect || !list) return;
     campeonatoSelect.innerHTML = '<option value="">Selecione um campeonato</option>';
     campeonatoSelect.value = "";
 
     async function carregarIngressos() {
         campeonatoSelected = campeonatoSelect.value;
-        ingressosBtns.style.display = 'none';
+        novoIngressoBtns.style.display = 'none';
         list.innerHTML = '<li>Por favor, selecione um campeonato.</li>';
         // Carrega os campeonatos para o select
         try {

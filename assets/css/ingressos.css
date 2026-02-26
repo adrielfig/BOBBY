@@ -66,6 +66,7 @@
     flex-direction: column;
     align-items: center;
     margin-top: 20px;
+    display: none;
 }
 
 #novo-ingresso-input input {
