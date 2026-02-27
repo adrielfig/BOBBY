@@ -16,11 +16,12 @@ function createWindow() {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
-      nodeIntegration: false
+      nodeIntegration: false,
+      devTools: false
     }
   })
   mainWindow.loadFile('./index.html')
- // Menu.setApplicationMenu(null);
+  Menu.setApplicationMenu(null);
 }
 
 app.whenReady().then(async () => {
