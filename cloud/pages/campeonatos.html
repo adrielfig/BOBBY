@@ -4,8 +4,8 @@
   <button id="novo-campeonato-btn" onclick="aparecerCampeonatoInput()">Novo Campeonato</button>
   <div id="campeonato-input">
     <input type="text" id="input-campeonato-nome" placeholder="Nome do campeonato...">
-    <button onclick="confirmarCampeonatoCriacao()">✔ Confirmar</button>
-    <button onclick="this.parentElement.style.display='none'">✖ Cancelar</button>
+    <button tabindex="-1" onclick="confirmarCampeonatoCriacao()">✔ Confirmar</button>
+    <button tabindex="-1" onclick="this.parentElement.style.display='none'">✖ Cancelar</button>
   </div>
   <div id="campeonatos-lista">
     <ul>

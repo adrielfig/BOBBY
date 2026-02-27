@@ -8,15 +8,16 @@ function createWindow() {
     width: 800,
     height: 600,
     icon: path.join(__dirname, 'assets', 'images', 'icon.jpg'),
+    resizable: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
       nodeIntegration: false
     }
   })
-
+  win.maximize();
   win.loadFile('./index.html')
-  //Menu.setApplicationMenu(null);
+  Menu.setApplicationMenu(null);
 }
 
 app.whenReady().then(async () => {
@@ -71,6 +72,45 @@ app.whenReady().then(async () => {
 
     const response = await fetch(`${process.env.FIREBASE_URL}/campeonatos/${data}.json?auth=${process.env.FIREBASE_AUTH_KEY}`, {
       method: 'DELETE'
+    });
+    return response.json();
+  });
+
+  ipcMain.handle('set-ingresso', async (event, data) => {
+    try {
+      if (!data || !data.campeonato || !data.ingresso) {
+        throw new Error('Dados de ingresso inválidos.');
+      }
+
+      const { campeonato, ingresso } = data;
+
+      const response = await fetch(`${process.env.FIREBASE_URL}/campeonatos/${campeonato}/ingressos.json?auth=${process.env.FIREBASE_AUTH_KEY}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(ingresso)
+      });
+
+      return response.json();
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
+  });
+
+  ipcMain.handle('excluir-ingresso', async (event, campeonato, id) => {
+    const response = await fetch(`${process.env.FIREBASE_URL}/campeonatos/${campeonato}/ingressos/${id}.json?auth=${process.env.FIREBASE_AUTH_KEY}`, {
+      method: 'DELETE'
+    });
+    return response.json();
+  });
+
+  ipcMain.handle('atualizar-ingresso', async (event, campeonato, id, data) => {
+    const response = await fetch(`${process.env.FIREBASE_URL}/campeonatos/${campeonato}/ingressos/${id}.json?auth=${process.env.FIREBASE_AUTH_KEY}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
     });
     return response.json();
   });

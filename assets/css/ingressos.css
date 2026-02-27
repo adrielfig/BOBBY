@@ -69,6 +69,14 @@
     display: none;
 }
 
+#novo-ingresso-btns {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
 #novo-ingresso-input input {
     display: block;
     width: 280px;

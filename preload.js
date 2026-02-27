@@ -7,5 +7,7 @@ contextBridge.exposeInMainWorld('api', {
   criarCampeonato: (data) => ipcRenderer.invoke('criar-campeonato', data),
   excluirCampeonato: (data) => ipcRenderer.invoke('excluir-campeonato', data),
   setIngresso: (data) => ipcRenderer.invoke('set-ingresso', data),
+  excluirIngresso: (campeonato, id) => ipcRenderer.invoke('excluir-ingresso', campeonato, id),
+  atualizarIngresso: (campeonato, id, data) => ipcRenderer.invoke('atualizar-ingresso', campeonato, id, data),
 
 });

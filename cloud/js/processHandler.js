@@ -28,10 +28,62 @@ async function confirmarCampeonatoCriacao() {
     try {
         const resultado = await window.api.criarCampeonato(nome);
         if (resultado == "existente") return alert("Campeonato já existe!");
-        document.getElementById('container-input').innerHTML = '';
-        campeonatos();
+        alert("Campeonato criado com sucesso!");
+        setTimeout(() => {
+            campeonatos();
+        }, 1000);
     } catch (err) {
         console.error(err);
+    }
+}
+
+async function confirmarIngressoCriacao() {
+    const campeonatoSelect = document.getElementById('ingressos-campeonato-select');
+    const campeonato = campeonatoSelect ? campeonatoSelect.value : '';
+
+    const jogo = document.getElementById('novo-ingresso-jogo')?.value || '';
+    const preco = document.getElementById('novo-ingresso-preco')?.value || '';
+    const estoque = document.getElementById('novo-ingresso-estoque')?.value || '';
+    const data = document.getElementById('novo-ingresso-data')?.value || '';
+    const horario = document.getElementById('novo-ingresso-horario')?.value || '';
+    const estadio = document.getElementById('novo-ingresso-estadio')?.value || '';
+    const thumbnail = document.getElementById('novo-ingresso-thumbnail')?.value || '';
+
+    if (!campeonato) {
+        alert('Selecione um campeonato!');
+        return;
+    }
+
+    if (!jogo || !preco || !estoque || !data || !horario || !estadio) {
+        alert('Preencha todos os campos do ingresso!');
+        return;
+    }
+
+    const ingresso = {
+        jogo,
+        preco: Number(preco),
+        estoque: Number(estoque),
+        data,
+        horario,
+        estadio,
+        thumbnail: thumbnail || null
+    };
+
+    try {
+        await window.api.setIngresso({ campeonato, ingresso });
+        alert('Ingresso criado com sucesso!');
+
+        const novoIngressoInput = document.getElementById('novo-ingresso-input');
+        if (novoIngressoInput) {
+            novoIngressoInput.style.display = 'none';
+        }
+
+        if (typeof ingressos === 'function') {
+            ingressos();
+        }
+    } catch (err) {
+        console.error(err);
+        alert('Erro ao criar ingresso.');
     }
 }
 
