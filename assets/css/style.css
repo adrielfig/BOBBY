@@ -26,6 +26,57 @@ body {
     padding: 0;
 }
 
+#titlebar {
+    height: 32px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    -webkit-app-region: drag;
+    box-sizing: border-box;
+    padding: 0 8px;
+}
+
+#titlebar-drag-region {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#titlebar-title {
+    font-family: "RobotoRegular";
+    font-size: 0.9rem;
+}
+
+#titlebar-buttons {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    -webkit-app-region: no-drag;
+}
+
+#titlebar-buttons button {
+    width: 32px;
+    height: 24px;
+    border: none;
+    background: transparent;
+    color: var(--secondary-color);
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 0.8rem;
+}
+
+#titlebar-buttons button:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+#btn-close:hover {
+    background-color: #e81123;
+    color: #ffffff;
+}
+
 main#container {
     display: flex;
     flex-direction: column;
@@ -78,6 +129,6 @@ nav ul li button:hover {
 }
 
 h1#entrada {
-    margin-top: 30px;
+    margin-top: 20vh;
     font-size: 2.5rem;
 }

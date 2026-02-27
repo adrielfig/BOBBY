@@ -3,20 +3,23 @@ const { app, BrowserWindow, Menu, ipcMain } = require('electron')
 const path = require('path')
 const fs = require('fs');
 
+let mainWindow = null;
+
 function createWindow() {
-  const win = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     icon: path.join(__dirname, 'assets', 'images', 'icon.jpg'),
     resizable: false,
+    frame: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
       nodeIntegration: false
     }
   })
-  win.maximize();
-  win.loadFile('./index.html')
+  mainWindow.maximize();
+  mainWindow.loadFile('./index.html')
   Menu.setApplicationMenu(null);
 }
 
@@ -167,6 +170,23 @@ app.whenReady().then(async () => {
         ingressosPorCampeonato: []
       };
     }
+  });
+
+  ipcMain.handle('window-minimize', () => {
+    if (mainWindow) mainWindow.minimize();
+  });
+
+  ipcMain.handle('window-toggle-maximize', () => {
+    if (!mainWindow) return;
+    if (mainWindow.isMaximized()) {
+      mainWindow.unmaximize();
+    } else {
+      mainWindow.maximize();
+    }
+  });
+
+  ipcMain.handle('window-close', () => {
+    if (mainWindow) mainWindow.close();
   });
 
   createWindow()

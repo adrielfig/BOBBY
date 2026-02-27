@@ -10,5 +10,8 @@ contextBridge.exposeInMainWorld('api', {
   excluirIngresso: (campeonato, id) => ipcRenderer.invoke('excluir-ingresso', campeonato, id),
   atualizarIngresso: (campeonato, id, data) => ipcRenderer.invoke('atualizar-ingresso', campeonato, id, data),
   getEstatisticas: () => ipcRenderer.invoke('get-estatisticas'),
+  windowMinimize: () => ipcRenderer.invoke('window-minimize'),
+  windowToggleMaximize: () => ipcRenderer.invoke('window-toggle-maximize'),
+  windowClose: () => ipcRenderer.invoke('window-close'),
 
 });

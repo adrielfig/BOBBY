@@ -16,6 +16,17 @@
 </head>
 
 <body>
+  <div id="titlebar">
+    <div id="titlebar-drag-region">
+      <span id="titlebar-title">Controlador da Bilheteria</span>
+    </div>
+    <div id="titlebar-buttons">
+      <button id="btn-minimize" aria-label="Minimizar">─</button>
+      <button id="btn-maximize" aria-label="Maximizar ou restaurar">☐</button>
+      <button id="btn-close" aria-label="Fechar">✕</button>
+    </div>
+  </div>
+
   <nav id="navbar" style="display: none;">
     <ul>
       <li><button onclick="transition('ingressos.html', this)">Ingressos</button></li>
@@ -27,11 +38,8 @@
   <main id="container">  
       <h1 id="entrada" class="animate__animated animate__backInDown">Seja bem-vindo, Bobby.</h1>
   </main>
-
-  <script src="./cloud/js/processHandler.js"></script>
-  <script src="./cloud/js/pageTransition.js"></script>
-  <!-- <script src="https://cdn.jsdelivr.net/gh/adrielfig/BOBBY@refs/heads/master/cloud/js/processHandler.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/adrielfig/BOBBY@refs/heads/master/cloud/js/pageTransition.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/gh/adrielfig/BOBBY@refs/heads/master/cloud/js/processHandler.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/adrielfig/BOBBY@refs/heads/master/cloud/js/pageTransition.js"></script>
 </body>
 
 </html>

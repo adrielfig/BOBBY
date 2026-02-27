@@ -23,6 +23,25 @@ if (previousFontSize) {
     }
 }
 
+// Controles da janela (titlebar personalizada)
+const btnMinimize = document.getElementById('btn-minimize');
+const btnMaximize = document.getElementById('btn-maximize');
+const btnClose = document.getElementById('btn-close');
+
+if (btnMinimize && btnMaximize && btnClose && window.api) {
+    btnMinimize.addEventListener('click', () => {
+        window.api.windowMinimize();
+    });
+
+    btnMaximize.addEventListener('click', () => {
+        window.api.windowToggleMaximize();
+    });
+
+    btnClose.addEventListener('click', () => {
+        window.api.windowClose();
+    });
+}
+
 function aparecerCampeonatoInput() {
     const container = document.getElementById('campeonato-input');
     container.style.display = 'block';
