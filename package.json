@@ -1,9 +1,9 @@
 {
-  "name": "Controlador da Bilheteria",
+  "name": "Bobby_Controller",
   "version": "1.0.0",
-  "description": "Um aplicativo desktop que permite controlar a bilheteria.",
+  "description": "Um aplicativo desktop que permite controlar a bilheteria do Bobby.",
   "license": "ISC",
-  "author": "blackouty",
+  "author": "adrielfig",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
