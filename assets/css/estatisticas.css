@@ -1,0 +1,51 @@
+#estatisticas {
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+#estatisticas h1 {
+  margin-bottom: 10px;
+}
+
+#estatisticas-resumo {
+  display: flex;
+  gap: 16px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.estat-card {
+  flex: 1;
+  min-width: 200px;
+  padding: 15px 20px;
+  background-color: var(--primary-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  box-sizing: border-box;
+}
+
+.estat-card span {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+#estatisticas-detalhes {
+  margin-top: 20px;
+}
+
+#estatisticas-detalhes ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#estatisticas-detalhes li {
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  background-color: var(--primary-color);
+  border-radius: 6px;
+}
+

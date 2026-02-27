@@ -13,12 +13,15 @@
     --secondary-color: #333333;
     --third-color: #d6d6d6;
     --background-color: #d5d5d5;
+    --text-color: #000000;
+    --font-size-base: 16px;
 }
 
 body {
     background-color: var(--background-color);
     color: var(--text-color);
     font-family: "RobotoThin";
+    font-size: var(--font-size-base);
     margin: 0;
     padding: 0;
 }

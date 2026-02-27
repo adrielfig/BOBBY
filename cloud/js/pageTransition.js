@@ -256,11 +256,97 @@ async function ingressos() {
 }
 
 async function estatisticas() {
+    const resumoTotalCampeonatos = container.querySelector('#total-campeonatos');
+    const resumoTotalIngressos = container.querySelector('#total-ingressos');
+    const listaIngressosCampeonato = container.querySelector('#lista-ingressos-campeonato');
 
+    if (!resumoTotalCampeonatos || !resumoTotalIngressos || !listaIngressosCampeonato) return;
+
+    resumoTotalCampeonatos.textContent = 'Carregando...';
+    resumoTotalIngressos.textContent = 'Carregando...';
+    listaIngressosCampeonato.innerHTML = '<li>Carregando...</li>';
+
+    try {
+        const dados = await window.api.getEstatisticas();
+        const {
+            totalCampeonatos = 0,
+            totalIngressos = 0,
+            totalCompras = 0,
+            ingressosPorCampeonato = []
+        } = dados || {};
+
+        resumoTotalCampeonatos.textContent = String(totalCampeonatos);
+        resumoTotalIngressos.textContent = `${totalIngressos} ingressos / ${totalCompras} compra(s)`;
+
+        if (!ingressosPorCampeonato.length) {
+            listaIngressosCampeonato.innerHTML = '<li>Nenhum ingresso cadastrado.</li>';
+            return;
+        }
+
+        listaIngressosCampeonato.innerHTML = '';
+        ingressosPorCampeonato.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = `${item.campeonato}: ${item.quantidadeIngressos} ingresso(s) / ${item.quantidadeCompras} compra(s)`;
+            listaIngressosCampeonato.appendChild(li);
+        });
+    } catch (error) {
+        console.error(error);
+        resumoTotalCampeonatos.textContent = '0';
+        resumoTotalIngressos.textContent = '0 ingressos / 0 compra(s)';
+        listaIngressosCampeonato.innerHTML = '<li>Erro ao carregar estatísticas.</li>';
+    }
 }
 
 async function configuracoes() {
+    const root = document.documentElement;
+    const toggle = container.querySelector('#dark-mode-toggle');
+    const fontSizeSelect = container.querySelector('#font-size-select');
+    if (!toggle || !fontSizeSelect) return;
 
+    const applyDarkTheme = () => {
+        root.style.setProperty('--background-color', '#1e1d1d');
+        root.style.setProperty('--text-color', '#ffffff');
+        root.style.setProperty('--primary-color', '#333333');
+        root.style.setProperty('--secondary-color', '#a0a0a0');
+        root.style.setProperty('--third-color', '#1f1f1f');
+        localStorage.setItem('theme', 'dark');
+    };
+
+    const applyLightTheme = () => {
+        root.style.removeProperty('--background-color');
+        root.style.removeProperty('--text-color');
+        root.style.removeProperty('--primary-color');
+        root.style.removeProperty('--secondary-color');
+        root.style.removeProperty('--third-color');
+        localStorage.removeItem('theme');
+    };
+
+    const applyFontSize = (sizeKey) => {
+        let sizeValue = '16px';
+        if (sizeKey === 'small') sizeValue = '14px';
+        if (sizeKey === 'large') sizeValue = '18px';
+        root.style.setProperty('--font-size-base', sizeValue);
+        localStorage.setItem('fontSize', sizeKey);
+    };
+
+    const previousTheme = localStorage.getItem('theme');
+    const previousFontSize = localStorage.getItem('fontSize') || 'medium';
+
+    toggle.checked = previousTheme === 'dark';
+    fontSizeSelect.value = previousFontSize;
+    applyFontSize(previousFontSize);
+
+    toggle.addEventListener('change', () => {
+        if (toggle.checked) {
+            applyDarkTheme();
+        } else {
+            applyLightTheme();
+        }
+    });
+
+    fontSizeSelect.addEventListener('change', () => {
+        applyFontSize(fontSizeSelect.value);
+    });
 }
 
 async function transition(newPage, button) {

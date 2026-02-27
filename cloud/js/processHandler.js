@@ -2,6 +2,7 @@ const container = document.getElementById('container');
 const nav = document.getElementById("navbar")
 
 const previousTheme = localStorage.getItem('theme');
+const previousFontSize = localStorage.getItem('fontSize');
 const root = document.documentElement;
 
 if (previousTheme && previousTheme === 'dark') {
@@ -10,6 +11,16 @@ if (previousTheme && previousTheme === 'dark') {
     root.style.setProperty('--primary-color', '#333333');
     root.style.setProperty('--secondary-color', '#a0a0a0');
     root.style.setProperty('--third-color', '#1f1f1f');
+}
+
+if (previousFontSize) {
+    if (previousFontSize === 'small') {
+        root.style.setProperty('--font-size-base', '14px');
+    } else if (previousFontSize === 'large') {
+        root.style.setProperty('--font-size-base', '18px');
+    } else {
+        root.style.setProperty('--font-size-base', '16px');
+    }
 }
 
 function aparecerCampeonatoInput() {
@@ -89,7 +100,11 @@ async function confirmarIngressoCriacao() {
 
 // Remoção da animação de entrada
 setTimeout(() => {
+    if (!container || !nav) return;
+
     const h1 = container.getElementsByTagName('h1')[0];
+    if (!h1) return;
+
     h1.classList.remove('animate__backInDown');
     h1.classList.add('animate__backOutUp');
     setTimeout(() => {

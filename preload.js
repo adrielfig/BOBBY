@@ -9,5 +9,6 @@ contextBridge.exposeInMainWorld('api', {
   setIngresso: (data) => ipcRenderer.invoke('set-ingresso', data),
   excluirIngresso: (campeonato, id) => ipcRenderer.invoke('excluir-ingresso', campeonato, id),
   atualizarIngresso: (campeonato, id, data) => ipcRenderer.invoke('atualizar-ingresso', campeonato, id, data),
+  getEstatisticas: () => ipcRenderer.invoke('get-estatisticas'),
 
 });

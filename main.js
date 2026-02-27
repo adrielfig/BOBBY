@@ -115,5 +115,59 @@ app.whenReady().then(async () => {
     return response.json();
   });
 
+  ipcMain.handle('get-estatisticas', async () => {
+    try {
+      const campeonatosResponse = await fetch(`${process.env.FIREBASE_URL}/campeonatos.json?auth=${process.env.FIREBASE_AUTH_KEY}`, {
+        cache: 'no-store'
+      });
+      const campeonatosBody = await campeonatosResponse.json();
+      const campeonatos = campeonatosBody ? Object.keys(campeonatosBody) : [];
+
+      let totalIngressos = 0;
+      let totalCompras = 0;
+      const ingressosPorCampeonato = [];
+
+      for (const nome of campeonatos) {
+        const ingressosResponse = await fetch(`${process.env.FIREBASE_URL}/campeonatos/${nome}/ingressos.json?auth=${process.env.FIREBASE_AUTH_KEY}`, {
+          cache: 'no-store'
+        });
+        const ingressosBody = await ingressosResponse.json();
+        const ingressosIds = ingressosBody ? Object.keys(ingressosBody) : [];
+        const quantidadeIngressos = ingressosIds.length;
+        let quantidadeCompras = 0;
+
+        ingressosIds.forEach(id => {
+          const ingresso = ingressosBody[id];
+          if (ingresso && ingresso.compras && typeof ingresso.compras === 'object') {
+            quantidadeCompras += Object.keys(ingresso.compras).length;
+          }
+        });
+
+        totalIngressos += quantidadeIngressos;
+        totalCompras += quantidadeCompras;
+
+        ingressosPorCampeonato.push({
+          campeonato: nome,
+          quantidadeIngressos,
+          quantidadeCompras
+        });
+      }
+
+      return {
+        totalCampeonatos: campeonatos.length,
+        totalIngressos,
+        totalCompras,
+        ingressosPorCampeonato
+      };
+    } catch (error) {
+      console.error(error);
+      return {
+        totalCampeonatos: 0,
+        totalIngressos: 0,
+        ingressosPorCampeonato: []
+      };
+    }
+  });
+
   createWindow()
 })
