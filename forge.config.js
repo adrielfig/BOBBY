@@ -1,17 +1,21 @@
+const path = require('path');
 const { FusesPlugin } = require('@electron-forge/plugin-fuses');
 const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 
 module.exports = {
   packagerConfig: {
     asar: true,
-    ignore: (path) => {
-      if (path.includes('/cloud')) {
+    name: 'Bobby Bilheteria',
+    executableName: 'Bobby Bilheteria',
+    icon: path.join(__dirname, 'assets', 'images', 'icon'),
+    ignore: (filePath) => {
+      if (filePath.includes('/cloud')) {
         return true;
       }
-      if (path === '/README.md') {
+      if (filePath === '/README.md') {
         return true;
       }
-      if (path === '/.gitignore') {
+      if (filePath === '/.gitignore') {
         return true;
       }
     }
@@ -19,9 +23,15 @@ module.exports = {
   rebuildConfig: {},
   makers: [
     {
+      name: '@electron-addons/electron-forge-maker-nsis',
+      platforms: ['win32'],
+      config: {
+      },
+    },
+    /* {
       name: '@electron-forge/maker-squirrel',
       config: {},
-    },
+    }, */
     {
       name: '@electron-forge/maker-zip',
       platforms: ['darwin'],

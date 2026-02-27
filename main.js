@@ -1,7 +1,9 @@
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 const { app, BrowserWindow, Menu, ipcMain } = require('electron')
-const path = require('path')
-const fs = require('fs');
+
+const GITHUB_CLOUD = process.env.GITHUB_CLOUD || 'https://cdn.jsdelivr.net/gh/adrielfig/BOBBY@master/cloud';
+const PURGE_URL = process.env.PURGE_URL || 'https://purge.jsdelivr.net/gh/adrielfig/BOBBY@master/cloud';
 
 let mainWindow = null;
 
@@ -9,7 +11,7 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    icon: path.join(__dirname, 'assets', 'images', 'icon.jpg'),
+    icon: path.join(__dirname, 'assets', 'images', 'icon.ico'),
     frame: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
@@ -23,8 +25,8 @@ function createWindow() {
 
 app.whenReady().then(async () => {
   ipcMain.handle('get-cloud-page', async (event, page) => {
-    await fetch(`${process.env.PURGE_URL}/pages/${page}`)
-    const response = await fetch(`${process.env.GITHUB_CLOUD}/pages/${page}`, {
+    await fetch(`${PURGE_URL}/pages/${page}`)
+    const response = await fetch(`${GITHUB_CLOUD}/pages/${page}`, {
       cache: 'no-store'
     });
     return await response.text();
