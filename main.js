@@ -10,7 +10,6 @@ function createWindow() {
     width: 800,
     height: 600,
     icon: path.join(__dirname, 'assets', 'images', 'icon.jpg'),
-    resizable: false,
     frame: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
@@ -18,9 +17,8 @@ function createWindow() {
       nodeIntegration: false
     }
   })
-  mainWindow.maximize();
   mainWindow.loadFile('./index.html')
-  Menu.setApplicationMenu(null);
+ // Menu.setApplicationMenu(null);
 }
 
 app.whenReady().then(async () => {
